@@ -27,3 +27,21 @@ blockchain = [
 # Anthony's KelloggCoin balance is 2650
 
 # 👇👇👇 Your code HERE 👇👇👇
+
+balances = Hash.new(0)
+
+blockchain.each do |transaction|
+  from_user = transaction["from_user"]
+  to_user = transaction["to_user"]
+  amount = transaction["amount"]
+  
+  balances[to_user] += amount
+  
+  if from_user != nil
+    balances[from_user] -= amount
+  end
+end
+
+balances.each do |user, balance|
+  puts "#{user.capitalize}'s KelloggCoin balance is #{balance}"
+end
